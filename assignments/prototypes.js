@@ -136,7 +136,10 @@ Humanoid.prototype.greet = function(){
       'Dagger',
     ],
     language: 'Elvish',
-  });
+	});
+	
+
+	
 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
@@ -153,4 +156,81 @@ Humanoid.prototype.greet = function(){
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
-  // * Create two new objects, one a villain and one a hero and fight it out with methods!
+	// * Create two new objects, one a villain and one a hero and fight it out with methods!
+	
+	function Villan (villanObj){
+		Humanoid.call(this, villanObj);
+
+	}
+
+	Villan.prototype.strike = function () {
+		 let health = this.healthPoints
+		return function() {
+			health -= 2
+			return health
+			
+		}
+
+	}
+
+
+
+	function Hero(heroObj){
+		Humanoid.call(this, heroObj);
+	}
+
+	Hero.prototype.obsorb = function counter() {
+
+		let count = this.healthPoints;
+	
+		return function(){
+			count -= 5
+			return count;
+		};
+		
+
+	};
+
+
+	const hero = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 10,
+    name: 'Our Hero',
+    team: 'Lightness',
+    weapons: [
+      'Lightning Bolt',
+      'Horn',
+    ],
+    language: 'Gods',
+	});
+	
+
+	const villan = new Villan({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 10,
+    name: 'The Villan',
+    team: 'Dark Side',
+    weapons: [
+      'Sticks',
+      'Stones',
+    ],
+    language: 'Death',
+	});
+	
+
+	let strike = villan.strike()
+	console.log(strike);
+	console.log(strike);
+	console.log(villan.healthPoints);
+
+
