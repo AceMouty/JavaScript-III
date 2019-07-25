@@ -176,9 +176,9 @@ Humanoid.prototype.greet = function(){
 				if(health > 0){
 					return console.log(`${name} has taken damage, they currently have ${health} hp`)
 				// return health
-		 } else if(health <= 0) {
-			console.log(`${name} has fallen`);
-			} 
+		 		} else if(health <= 0) {
+					console.log(`${name} has fallen`);
+				} 
 			
 		};
 
