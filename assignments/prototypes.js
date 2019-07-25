@@ -151,7 +151,9 @@ Humanoid.prototype.greet = function(){
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-
+	console.log();
+	console.log();
+	console.log();
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
@@ -163,15 +165,24 @@ Humanoid.prototype.greet = function(){
 
 	}
 
-	Villan.prototype.strike = function () {
-		 let health = this.healthPoints
-		return function() {
-			health -= 2
-			return health
-			
-		}
+	Villan.prototype.takesDamage = function () {
+		let name = this.name;
+		let health = this.healthPoints
+		
+			return function(){
+				
+				health -= 1
 
-	}
+				if(health > 0){
+					return console.log(`${name} has taken damage, they currently have ${health} hp`)
+				// return health
+		 } else if(health <= 0) {
+			console.log(`${name} has fallen`);
+			} 
+			
+		};
+
+	};
 
 
 
@@ -179,17 +190,24 @@ Humanoid.prototype.greet = function(){
 		Humanoid.call(this, heroObj);
 	}
 
-	Hero.prototype.obsorb = function counter() {
+	Hero.prototype.obsorbsDamage = function() {
+		let name = this.name;
+		let health = this.healthPoints;
+			return function(){
+				
+				health -= 5
+				
+				if(health > 0){
+					
+					console.log(`${name} has taken damage, they currently have ${health} hp`)
+					return health;
 
-		let count = this.healthPoints;
-	
-		return function(){
-			count -= 5
-			return count;
+				} else if(health <= 0) {
+					return console.log(`${name} has fallen`);
+				}
+
+			};
 		};
-		
-
-	};
 
 
 	const hero = new Hero({
@@ -228,9 +246,13 @@ Humanoid.prototype.greet = function(){
 	});
 	
 
-	let strike = villan.strike()
-	console.log(strike);
-	console.log(strike);
-	console.log(villan.healthPoints);
+	let takesDamage = villan.takesDamage();
+	let obsorbsDamage = hero.obsorbsDamage();
+
+	takesDamage();
+	obsorbsDamage();
+	takesDamage();
+	takesDamage();
+	obsorbsDamage();
 
 
